@@ -1,0 +1,316 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AEDB40B41719E6780003F048 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDB40B31719E6780003F048 /* UIKit.framework */; };
+		AEDB40B61719E6780003F048 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDB40B51719E6780003F048 /* Foundation.framework */; };
+		AEDB40B81719E6780003F048 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDB40B71719E6780003F048 /* CoreGraphics.framework */; };
+		AEDB40BE1719E6780003F048 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AEDB40BC1719E6780003F048 /* InfoPlist.strings */; };
+		AEDB40C01719E6780003F048 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDB40BF1719E6780003F048 /* main.m */; };
+		AEDB40C41719E6780003F048 /* NCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDB40C31719E6780003F048 /* NCAppDelegate.m */; };
+		AEDB40C61719E6780003F048 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = AEDB40C51719E6780003F048 /* Default.png */; };
+		AEDB40C81719E6780003F048 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AEDB40C71719E6780003F048 /* Default@2x.png */; };
+		AEDB40CA1719E6780003F048 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AEDB40C91719E6780003F048 /* Default-568h@2x.png */; };
+		AEDB40CD1719E6780003F048 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEDB40CB1719E6780003F048 /* MainStoryboard.storyboard */; };
+		AEDB40D01719E6780003F048 /* NCTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDB40CF1719E6780003F048 /* NCTableViewController.m */; };
+		AEDB40D71719E6BF0003F048 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDB40D61719E6BF0003F048 /* AddressBook.framework */; };
+		AEDB40DA1719ECF50003F048 /* NCContact.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDB40D91719ECF50003F048 /* NCContact.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AEDB40B01719E6780003F048 /* NumberCollector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NumberCollector.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AEDB40B31719E6780003F048 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		AEDB40B51719E6780003F048 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		AEDB40B71719E6780003F048 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		AEDB40BB1719E6780003F048 /* NumberCollector-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NumberCollector-Info.plist"; sourceTree = "<group>"; };
+		AEDB40BD1719E6780003F048 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AEDB40BF1719E6780003F048 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		AEDB40C11719E6780003F048 /* NumberCollector-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NumberCollector-Prefix.pch"; sourceTree = "<group>"; };
+		AEDB40C21719E6780003F048 /* NCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCAppDelegate.h; sourceTree = "<group>"; };
+		AEDB40C31719E6780003F048 /* NCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NCAppDelegate.m; sourceTree = "<group>"; };
+		AEDB40C51719E6780003F048 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		AEDB40C71719E6780003F048 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		AEDB40C91719E6780003F048 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		AEDB40CC1719E6780003F048 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		AEDB40CE1719E6780003F048 /* NCTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCTableViewController.h; sourceTree = "<group>"; };
+		AEDB40CF1719E6780003F048 /* NCTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NCTableViewController.m; sourceTree = "<group>"; };
+		AEDB40D61719E6BF0003F048 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		AEDB40D81719ECF50003F048 /* NCContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCContact.h; sourceTree = "<group>"; };
+		AEDB40D91719ECF50003F048 /* NCContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCContact.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AEDB40AD1719E6780003F048 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AEDB40D71719E6BF0003F048 /* AddressBook.framework in Frameworks */,
+				AEDB40B41719E6780003F048 /* UIKit.framework in Frameworks */,
+				AEDB40B61719E6780003F048 /* Foundation.framework in Frameworks */,
+				AEDB40B81719E6780003F048 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AEDB40A71719E6780003F048 = {
+			isa = PBXGroup;
+			children = (
+				AEDB40D61719E6BF0003F048 /* AddressBook.framework */,
+				AEDB40B91719E6780003F048 /* NumberCollector */,
+				AEDB40B21719E6780003F048 /* Frameworks */,
+				AEDB40B11719E6780003F048 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AEDB40B11719E6780003F048 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AEDB40B01719E6780003F048 /* NumberCollector.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AEDB40B21719E6780003F048 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AEDB40B31719E6780003F048 /* UIKit.framework */,
+				AEDB40B51719E6780003F048 /* Foundation.framework */,
+				AEDB40B71719E6780003F048 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AEDB40B91719E6780003F048 /* NumberCollector */ = {
+			isa = PBXGroup;
+			children = (
+				AEDB40C21719E6780003F048 /* NCAppDelegate.h */,
+				AEDB40C31719E6780003F048 /* NCAppDelegate.m */,
+				AEDB40D81719ECF50003F048 /* NCContact.h */,
+				AEDB40D91719ECF50003F048 /* NCContact.m */,
+				AEDB40CB1719E6780003F048 /* MainStoryboard.storyboard */,
+				AEDB40CE1719E6780003F048 /* NCTableViewController.h */,
+				AEDB40CF1719E6780003F048 /* NCTableViewController.m */,
+				AEDB40BA1719E6780003F048 /* Supporting Files */,
+			);
+			path = NumberCollector;
+			sourceTree = "<group>";
+		};
+		AEDB40BA1719E6780003F048 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AEDB40BB1719E6780003F048 /* NumberCollector-Info.plist */,
+				AEDB40BC1719E6780003F048 /* InfoPlist.strings */,
+				AEDB40BF1719E6780003F048 /* main.m */,
+				AEDB40C11719E6780003F048 /* NumberCollector-Prefix.pch */,
+				AEDB40C51719E6780003F048 /* Default.png */,
+				AEDB40C71719E6780003F048 /* Default@2x.png */,
+				AEDB40C91719E6780003F048 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AEDB40AF1719E6780003F048 /* NumberCollector */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AEDB40D31719E6780003F048 /* Build configuration list for PBXNativeTarget "NumberCollector" */;
+			buildPhases = (
+				AEDB40AC1719E6780003F048 /* Sources */,
+				AEDB40AD1719E6780003F048 /* Frameworks */,
+				AEDB40AE1719E6780003F048 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NumberCollector;
+			productName = NumberCollector;
+			productReference = AEDB40B01719E6780003F048 /* NumberCollector.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AEDB40A81719E6780003F048 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = NC;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Duncan Cunningham";
+			};
+			buildConfigurationList = AEDB40AB1719E6780003F048 /* Build configuration list for PBXProject "NumberCollector" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = AEDB40A71719E6780003F048;
+			productRefGroup = AEDB40B11719E6780003F048 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AEDB40AF1719E6780003F048 /* NumberCollector */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AEDB40AE1719E6780003F048 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AEDB40BE1719E6780003F048 /* InfoPlist.strings in Resources */,
+				AEDB40C61719E6780003F048 /* Default.png in Resources */,
+				AEDB40C81719E6780003F048 /* Default@2x.png in Resources */,
+				AEDB40CA1719E6780003F048 /* Default-568h@2x.png in Resources */,
+				AEDB40CD1719E6780003F048 /* MainStoryboard.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AEDB40AC1719E6780003F048 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AEDB40C01719E6780003F048 /* main.m in Sources */,
+				AEDB40C41719E6780003F048 /* NCAppDelegate.m in Sources */,
+				AEDB40D01719E6780003F048 /* NCTableViewController.m in Sources */,
+				AEDB40DA1719ECF50003F048 /* NCContact.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		AEDB40BC1719E6780003F048 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AEDB40BD1719E6780003F048 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		AEDB40CB1719E6780003F048 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AEDB40CC1719E6780003F048 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AEDB40D11719E6780003F048 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		AEDB40D21719E6780003F048 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AEDB40D41719E6780003F048 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NumberCollector/NumberCollector-Prefix.pch";
+				INFOPLIST_FILE = "NumberCollector/NumberCollector-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		AEDB40D51719E6780003F048 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NumberCollector/NumberCollector-Prefix.pch";
+				INFOPLIST_FILE = "NumberCollector/NumberCollector-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AEDB40AB1719E6780003F048 /* Build configuration list for PBXProject "NumberCollector" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AEDB40D11719E6780003F048 /* Debug */,
+				AEDB40D21719E6780003F048 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AEDB40D31719E6780003F048 /* Build configuration list for PBXNativeTarget "NumberCollector" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AEDB40D41719E6780003F048 /* Debug */,
+				AEDB40D51719E6780003F048 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AEDB40A81719E6780003F048 /* Project object */;
+}
