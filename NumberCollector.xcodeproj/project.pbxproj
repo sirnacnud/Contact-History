@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE77E4C5171BAE1A00459A84 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE77E4C4171BAE1A00459A84 /* AddressBookUI.framework */; };
 		AEDB40B41719E6780003F048 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDB40B31719E6780003F048 /* UIKit.framework */; };
 		AEDB40B61719E6780003F048 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDB40B51719E6780003F048 /* Foundation.framework */; };
 		AEDB40B81719E6780003F048 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDB40B71719E6780003F048 /* CoreGraphics.framework */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AE77E4C4171BAE1A00459A84 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		AEDB40B01719E6780003F048 /* NumberCollector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NumberCollector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEDB40B31719E6780003F048 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AEDB40B51719E6780003F048 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -49,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE77E4C5171BAE1A00459A84 /* AddressBookUI.framework in Frameworks */,
 				AEDB40D71719E6BF0003F048 /* AddressBook.framework in Frameworks */,
 				AEDB40B41719E6780003F048 /* UIKit.framework in Frameworks */,
 				AEDB40B61719E6780003F048 /* Foundation.framework in Frameworks */,
@@ -62,6 +65,7 @@
 		AEDB40A71719E6780003F048 = {
 			isa = PBXGroup;
 			children = (
+				AE77E4C4171BAE1A00459A84 /* AddressBookUI.framework */,
 				AEDB40D61719E6BF0003F048 /* AddressBook.framework */,
 				AEDB40B91719E6780003F048 /* NumberCollector */,
 				AEDB40B21719E6780003F048 /* Frameworks */,
@@ -309,6 +313,7 @@
 				AEDB40D51719E6780003F048 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

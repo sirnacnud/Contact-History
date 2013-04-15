@@ -16,5 +16,6 @@
 @synthesize phoneNumber = _phoneNumber;
 @synthesize creationDate = _creationDate;
 @synthesize dateGroup = _dateGroup;
+@synthesize recordId = _recordId;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AddressBook/AddressBook.h>
 
 @interface NCContact : NSObject
 
@@ -16,5 +17,6 @@
 @property (nonatomic,strong) NSString* phoneNumber;
 @property (nonatomic,strong) NSString* creationDate;
 @property (nonatomic) NSInteger dateGroup;
+@property (nonatomic) ABRecordID recordId;
 
 @end
