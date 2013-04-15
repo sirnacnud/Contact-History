@@ -168,8 +168,6 @@
             }
         }
         
-        //self.lastDate = date;
-        //[self.dates addObject:date];
         [self.groupCounts addObject:[NSNumber numberWithInteger:groupCount]];
     }
 }
@@ -198,6 +196,36 @@
         cell = [[UITableViewCell alloc]
                 initWithStyle:UITableViewCellStyleSubtitle
                 reuseIdentifier:CellIdentifier];
+    }
+    
+    NSInteger row = 0;
+    NSInteger section = [indexPath section];
+    
+    for( int i = 0; i < section; ++i )
+    {
+        row = row + [[self.groupCounts objectAtIndex:i] intValue];
+    }
+    
+    NCContact* contact = [self.contacts objectAtIndex:row + [indexPath row]];
+    
+    if( [contact.firstName length] > 0 )
+    {        
+        if( [contact.lastName length] > 0 )
+        {
+            cell.textLabel.text = [NSString stringWithFormat:@"%@ %@",contact.firstName,contact.lastName];
+        }
+        else
+        {
+            cell.textLabel.text = contact.firstName;
+        }
+    }
+    else if( [contact.company length] > 0 )
+    {
+        cell.textLabel.text = contact.company;
+    }
+    else
+    {
+        cell.textLabel.text = contact.phoneNumber;
     }
     
     return cell;
