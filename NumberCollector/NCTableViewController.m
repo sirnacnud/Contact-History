@@ -266,7 +266,7 @@
         view.personViewDelegate = self;
         view.displayedPerson = ref;
         
-        [self presentViewController:view animated:YES completion:NULL];
+        [self.navigationController pushViewController:view animated:YES];
     }
 }
 
