@@ -130,7 +130,6 @@
                 contact.recordId = ABRecordGetRecordID( ref );
                 
                 contact.phoneNumber = (__bridge_transfer NSString*)ABMultiValueCopyValueAtIndex( phoneNumbers, 0 );
-                NSLog( @"Phone Number: %@", contact.phoneNumber );
             
                 CFRelease( phoneNumbers );
                 
@@ -140,31 +139,26 @@
                 
                 if( firstName )
                 {
-                    NSLog( @"First Name: %@", firstName );
                     contact.firstName = (__bridge_transfer NSString*)firstName;
                 }
                 
                 if( lastName )
                 {
-                    NSLog( @"Last Name: %@", lastName );
                     contact.lastName = (__bridge_transfer NSString*)lastName;
                 }
                 
                 if( company )
                 {
-                    NSLog( @"Company: %@", company );
                     contact.company = (__bridge_transfer NSString*)company;
                 }
                 
                 NSDate* creationDate = (__bridge_transfer NSDate*)ABRecordCopyValue( ref, kABPersonCreationDateProperty );
                 
-                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-                [formatter setDateFormat:@"yyyy-MM-dd"];
+                NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+                [formatter setDateStyle:NSDateFormatterMediumStyle];
+                [formatter setTimeStyle:NSDateFormatterNoStyle];
                 
                 date = [formatter stringFromDate:creationDate];
-                
-                NSLog( @"Creation Date: %@", date );
-                
                 
                 if( [self.lastDate compare:date] != NSOrderedSame )
                 {
