@@ -226,6 +226,10 @@
             cell.textLabel.text = contact.firstName;
         }
     }
+    else if( [contact.lastName length] > 0 )
+    {
+        cell.textLabel.text = contact.lastName;
+    }
     else if( [contact.company length] > 0 )
     {
         cell.textLabel.text = contact.company;
