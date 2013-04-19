@@ -100,12 +100,27 @@
     if( self.addressBook )
     {
         CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople( self.addressBook );
+        int numberOfPeople = CFArrayGetCount( allPeople );
+        
+        CFMutableArrayRef allPeopleMutable = CFArrayCreateMutableCopy( kCFAllocatorDefault, numberOfPeople, allPeople );
+        
+        // Reverse the list so it is sorted newest to oldest
+        for( int i = 0; i < numberOfPeople / 2; ++i )
+        {
+            const void* first = CFArrayGetValueAtIndex( allPeopleMutable, i );
+            const void* last = CFArrayGetValueAtIndex( allPeopleMutable, numberOfPeople - 1 - i );
+            
+            CFArraySetValueAtIndex( allPeopleMutable, i, last );
+            CFArraySetValueAtIndex( allPeopleMutable, numberOfPeople - i, first );
+        }
+        
+        CFRelease( allPeople );
         
         NSString* date = Nil;
         NSInteger groupCount = 0;
-        for (int i = 0; i < CFArrayGetCount( allPeople ); i++)
+        for( int i = 0; i < numberOfPeople; i++ )
         {
-            ABRecordRef ref = CFArrayGetValueAtIndex( allPeople, i );
+            ABRecordRef ref = CFArrayGetValueAtIndex( allPeopleMutable, i );
             
             ABMultiValueRef phoneNumbers = ABRecordCopyValue( ref, kABPersonPhoneProperty );
             
@@ -176,6 +191,8 @@
         }
         
         [self.groupCounts addObject:[NSNumber numberWithInteger:groupCount]];
+        
+        CFRelease( allPeopleMutable );
     }
 }
 
