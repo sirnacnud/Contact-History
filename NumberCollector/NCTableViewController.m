@@ -73,7 +73,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
     
     self.addressBook = ABAddressBookCreate();
     
@@ -210,7 +209,8 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView
                              dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
+    if( cell == nil )
+    {
         cell = [[UITableViewCell alloc]
                 initWithStyle:UITableViewCellStyleSubtitle
                 reuseIdentifier:CellIdentifier];
@@ -249,6 +249,9 @@
     {
         cell.textLabel.text = contact.phoneNumber;
     }
+    
+    [cell.textLabel setBackgroundColor:[UIColor clearColor]];
+    [cell.contentView setBackgroundColor:[UIColor whiteColor]];
     
     return cell;
 }
