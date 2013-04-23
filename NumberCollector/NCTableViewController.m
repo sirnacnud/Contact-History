@@ -18,6 +18,7 @@
 @property (nonatomic,strong) NSMutableArray* dates;
 @property (nonatomic,strong) NSMutableArray* groupCounts;
 @property (nonatomic,strong) NSString* lastDate;
+@property (nonatomic,strong) PullToRefreshView* pullView;
 @property (nonatomic) ABAddressBookRef addressBook;
 
 @end
@@ -29,6 +30,7 @@
 @synthesize lastDate = _lastDate;
 @synthesize groupCounts = _groupCounts;
 @synthesize addressBook = _addressBook;
+@synthesize pullView = _pullView;
 
 - (NSMutableArray*)contacts
 {
@@ -74,6 +76,10 @@
 {
     [super viewDidLoad];
     
+    self.pullView = [[PullToRefreshView alloc] initWithScrollView:(UIScrollView *) self.tableView];
+    [self.pullView setDelegate:self];
+    [self.tableView addSubview:self.pullView];
+    
     self.addressBook = ABAddressBookCreate();
     
     __block BOOL accessGranted = NO;
@@ -96,96 +102,9 @@
         accessGranted = YES;
     }
     
-    if( self.addressBook )
+    if( accessGranted )
     {
-        CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople( self.addressBook );
-        int numberOfPeople = CFArrayGetCount( allPeople );
-        
-        CFMutableArrayRef allPeopleMutable = CFArrayCreateMutableCopy( kCFAllocatorDefault, numberOfPeople, allPeople );
-        
-        // Reverse the list so it is sorted newest to oldest
-        for( int i = 0; i < numberOfPeople / 2; ++i )
-        {
-            const void* first = CFArrayGetValueAtIndex( allPeopleMutable, i );
-            const void* last = CFArrayGetValueAtIndex( allPeopleMutable, numberOfPeople - 1 - i );
-            
-            CFArraySetValueAtIndex( allPeopleMutable, i, last );
-            CFArraySetValueAtIndex( allPeopleMutable, numberOfPeople - i, first );
-        }
-        
-        CFRelease( allPeople );
-        
-        NSString* date = Nil;
-        NSInteger groupCount = 0;
-        for( int i = 0; i < numberOfPeople; i++ )
-        {
-            ABRecordRef ref = CFArrayGetValueAtIndex( allPeopleMutable, i );
-            
-            ABMultiValueRef phoneNumbers = ABRecordCopyValue( ref, kABPersonPhoneProperty );
-            
-            if( ABMultiValueGetCount( phoneNumbers ) > 0 )
-            {
-                NCContact* contact = [[NCContact alloc] init];
-                contact.recordId = ABRecordGetRecordID( ref );
-                
-                contact.phoneNumber = (__bridge_transfer NSString*)ABMultiValueCopyValueAtIndex( phoneNumbers, 0 );
-            
-                CFRelease( phoneNumbers );
-                
-                CFStringRef firstName = ABRecordCopyValue( ref, kABPersonFirstNameProperty );
-                CFStringRef lastName = ABRecordCopyValue( ref, kABPersonLastNameProperty );
-                CFStringRef company = ABRecordCopyValue( ref, kABPersonOrganizationProperty );
-                
-                if( firstName )
-                {
-                    contact.firstName = (__bridge_transfer NSString*)firstName;
-                }
-                
-                if( lastName )
-                {
-                    contact.lastName = (__bridge_transfer NSString*)lastName;
-                }
-                
-                if( company )
-                {
-                    contact.company = (__bridge_transfer NSString*)company;
-                }
-                
-                NSDate* creationDate = (__bridge_transfer NSDate*)ABRecordCopyValue( ref, kABPersonCreationDateProperty );
-                
-                NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-                [formatter setDateStyle:NSDateFormatterMediumStyle];
-                [formatter setTimeStyle:NSDateFormatterNoStyle];
-                
-                date = [formatter stringFromDate:creationDate];
-                
-                if( [self.lastDate compare:date] != NSOrderedSame )
-                {
-                    self.lastDate = date;
-                    [self.dates addObject:date];
-                    
-                    if( groupCount != 0 )
-                    {
-                        [self.groupCounts addObject:[NSNumber numberWithInteger:groupCount]];
-                        groupCount = 0;
-                    }
-
-                    groupCount++;
-                }
-                else
-                {
-                    groupCount++;
-                }
-                
-                contact.creationDate = self.lastDate;
-                
-                [self.contacts addObject:contact];
-            }
-        }
-        
-        [self.groupCounts addObject:[NSNumber numberWithInteger:groupCount]];
-        
-        CFRelease( allPeopleMutable );
+        [self reloadContactHistory];
     }
 }
 
@@ -250,9 +169,6 @@
         cell.textLabel.text = contact.phoneNumber;
     }
     
-    [cell.textLabel setBackgroundColor:[UIColor clearColor]];
-    [cell.contentView setBackgroundColor:[UIColor whiteColor]];
-    
     return cell;
 }
 
@@ -287,6 +203,113 @@
 - (BOOL)personViewController:(ABPersonViewController *)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifierForValue
 {
     return NO;
+}
+
+- (void)pullToRefreshViewShouldRefresh:(PullToRefreshView *)view;
+{
+    [self reloadContactHistory];
+    [self.tableView reloadData];
+    [self.pullView finishedLoading];
+}
+
+- (void)reloadContactHistory
+{
+    if( self.addressBook )
+    {
+        self.lastDate = nil;
+        [self.dates removeAllObjects];
+        [self.contacts removeAllObjects];
+        [self.groupCounts removeAllObjects];
+        
+        CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople( self.addressBook );
+        int numberOfPeople = CFArrayGetCount( allPeople );
+        
+        CFMutableArrayRef allPeopleMutable = CFArrayCreateMutableCopy( kCFAllocatorDefault, numberOfPeople, allPeople );
+        
+        // Reverse the list so it is sorted newest to oldest
+        for( int i = 0; i < numberOfPeople / 2; ++i )
+        {
+            const void* first = CFArrayGetValueAtIndex( allPeopleMutable, i );
+            const void* last = CFArrayGetValueAtIndex( allPeopleMutable, numberOfPeople - 1 - i );
+            
+            CFArraySetValueAtIndex( allPeopleMutable, i, last );
+            CFArraySetValueAtIndex( allPeopleMutable, numberOfPeople - i, first );
+        }
+        
+        CFRelease( allPeople );
+        
+        NSString* date = Nil;
+        NSInteger groupCount = 0;
+        for( int i = 0; i < numberOfPeople; i++ )
+        {
+            ABRecordRef ref = CFArrayGetValueAtIndex( allPeopleMutable, i );
+            
+            ABMultiValueRef phoneNumbers = ABRecordCopyValue( ref, kABPersonPhoneProperty );
+            
+            if( ABMultiValueGetCount( phoneNumbers ) > 0 )
+            {
+                NCContact* contact = [[NCContact alloc] init];
+                contact.recordId = ABRecordGetRecordID( ref );
+                
+                contact.phoneNumber = (__bridge_transfer NSString*)ABMultiValueCopyValueAtIndex( phoneNumbers, 0 );
+                
+                CFRelease( phoneNumbers );
+                
+                CFStringRef firstName = ABRecordCopyValue( ref, kABPersonFirstNameProperty );
+                CFStringRef lastName = ABRecordCopyValue( ref, kABPersonLastNameProperty );
+                CFStringRef company = ABRecordCopyValue( ref, kABPersonOrganizationProperty );
+                
+                if( firstName )
+                {
+                    contact.firstName = (__bridge_transfer NSString*)firstName;
+                }
+                
+                if( lastName )
+                {
+                    contact.lastName = (__bridge_transfer NSString*)lastName;
+                }
+                
+                if( company )
+                {
+                    contact.company = (__bridge_transfer NSString*)company;
+                }
+                
+                NSDate* creationDate = (__bridge_transfer NSDate*)ABRecordCopyValue( ref, kABPersonCreationDateProperty );
+                
+                NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+                [formatter setDateStyle:NSDateFormatterMediumStyle];
+                [formatter setTimeStyle:NSDateFormatterNoStyle];
+                
+                date = [formatter stringFromDate:creationDate];
+                
+                if( [self.lastDate compare:date] != NSOrderedSame )
+                {
+                    self.lastDate = date;
+                    [self.dates addObject:date];
+                    
+                    if( groupCount != 0 )
+                    {
+                        [self.groupCounts addObject:[NSNumber numberWithInteger:groupCount]];
+                        groupCount = 0;
+                    }
+                    
+                    groupCount++;
+                }
+                else
+                {
+                    groupCount++;
+                }
+                
+                contact.creationDate = self.lastDate;
+                
+                [self.contacts addObject:contact];
+            }
+        }
+        
+        [self.groupCounts addObject:[NSNumber numberWithInteger:groupCount]];
+        
+        CFRelease( allPeopleMutable );
+    }
 }
 
 @end

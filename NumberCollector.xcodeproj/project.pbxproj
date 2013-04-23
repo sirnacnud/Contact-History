@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE1991A717260EAC007DF73D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE1991A617260EAC007DF73D /* QuartzCore.framework */; };
+		AE1991A917260EBB007DF73D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE1991A817260EBB007DF73D /* AudioToolbox.framework */; };
+		AE1991AA17261124007DF73D /* PullToRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1991A517260EA4007DF73D /* PullToRefreshView.m */; };
+		AE1991AF17261382007DF73D /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = AE1991AB17261382007DF73D /* arrow.png */; };
+		AE1991B017261382007DF73D /* arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE1991AC17261382007DF73D /* arrow@2x.png */; };
+		AE1991B117261382007DF73D /* pop.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE1991AD17261382007DF73D /* pop.wav */; };
+		AE1991B217261382007DF73D /* psst1.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE1991AE17261382007DF73D /* psst1.wav */; };
 		AE77E4C5171BAE1A00459A84 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE77E4C4171BAE1A00459A84 /* AddressBookUI.framework */; };
 		AEDB40B41719E6780003F048 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDB40B31719E6780003F048 /* UIKit.framework */; };
 		AEDB40B61719E6780003F048 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDB40B51719E6780003F048 /* Foundation.framework */; };
@@ -24,6 +31,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AE1991A417260EA4007DF73D /* PullToRefreshView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PullToRefreshView.h; path = PullToRefresh/PullToRefreshView.h; sourceTree = "<group>"; };
+		AE1991A517260EA4007DF73D /* PullToRefreshView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = PullToRefreshView.m; path = PullToRefresh/PullToRefreshView.m; sourceTree = "<group>"; };
+		AE1991A617260EAC007DF73D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		AE1991A817260EBB007DF73D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		AE1991AB17261382007DF73D /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arrow.png; path = PullToRefresh/arrow.png; sourceTree = "<group>"; };
+		AE1991AC17261382007DF73D /* arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "arrow@2x.png"; path = "PullToRefresh/arrow@2x.png"; sourceTree = "<group>"; };
+		AE1991AD17261382007DF73D /* pop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = pop.wav; path = PullToRefresh/pop.wav; sourceTree = "<group>"; };
+		AE1991AE17261382007DF73D /* psst1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = psst1.wav; path = PullToRefresh/psst1.wav; sourceTree = "<group>"; };
 		AE77E4C4171BAE1A00459A84 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		AEDB40B01719E6780003F048 /* NumberCollector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NumberCollector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEDB40B31719E6780003F048 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -51,6 +66,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE1991A917260EBB007DF73D /* AudioToolbox.framework in Frameworks */,
+				AE1991A717260EAC007DF73D /* QuartzCore.framework in Frameworks */,
 				AE77E4C5171BAE1A00459A84 /* AddressBookUI.framework in Frameworks */,
 				AEDB40D71719E6BF0003F048 /* AddressBook.framework in Frameworks */,
 				AEDB40B41719E6780003F048 /* UIKit.framework in Frameworks */,
@@ -62,9 +79,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AE1991A117260E93007DF73D /* PullToRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				AE1991AB17261382007DF73D /* arrow.png */,
+				AE1991AC17261382007DF73D /* arrow@2x.png */,
+				AE1991AD17261382007DF73D /* pop.wav */,
+				AE1991AE17261382007DF73D /* psst1.wav */,
+				AE1991A417260EA4007DF73D /* PullToRefreshView.h */,
+				AE1991A517260EA4007DF73D /* PullToRefreshView.m */,
+			);
+			name = PullToRefresh;
+			sourceTree = "<group>";
+		};
 		AEDB40A71719E6780003F048 = {
 			isa = PBXGroup;
 			children = (
+				AE1991A817260EBB007DF73D /* AudioToolbox.framework */,
+				AE1991A617260EAC007DF73D /* QuartzCore.framework */,
+				AE1991A117260E93007DF73D /* PullToRefresh */,
 				AE77E4C4171BAE1A00459A84 /* AddressBookUI.framework */,
 				AEDB40D61719E6BF0003F048 /* AddressBook.framework */,
 				AEDB40B91719E6780003F048 /* NumberCollector */,
@@ -177,6 +210,10 @@
 				AEDB40C81719E6780003F048 /* Default@2x.png in Resources */,
 				AEDB40CA1719E6780003F048 /* Default-568h@2x.png in Resources */,
 				AEDB40CD1719E6780003F048 /* MainStoryboard.storyboard in Resources */,
+				AE1991AF17261382007DF73D /* arrow.png in Resources */,
+				AE1991B017261382007DF73D /* arrow@2x.png in Resources */,
+				AE1991B117261382007DF73D /* pop.wav in Resources */,
+				AE1991B217261382007DF73D /* psst1.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,6 +224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE1991AA17261124007DF73D /* PullToRefreshView.m in Sources */,
 				AEDB40C01719E6780003F048 /* main.m in Sources */,
 				AEDB40C41719E6780003F048 /* NCAppDelegate.m in Sources */,
 				AEDB40D01719E6780003F048 /* NCTableViewController.m in Sources */,
