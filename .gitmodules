@@ -1,3 +1,6 @@
 [submodule "PullToRefresh"]
 	path = PullToRefresh
 	url = git://github.com/sonnyparlin/PullToRefresh.git
+[submodule "MBProgressHUD"]
+	path = MBProgressHUD
+	url = https://github.com/jdg/MBProgressHUD.git

@@ -8,6 +8,7 @@
 
 #import "NCTableViewController.h"
 #import "NCContact.h"
+#import "MBProgressHUD.h"
 
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
@@ -104,7 +105,19 @@
     
     if( accessGranted )
     {
-        [self reloadContactHistory];
+        MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.labelText = @"Loading";
+        
+        self.tableView.userInteractionEnabled = NO;
+        
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            [self reloadContactHistory];
+            [self.tableView reloadData];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                self.tableView.userInteractionEnabled = YES;
+            });
+        });
     }
 }
 
@@ -125,8 +138,8 @@
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView
+    static NSString* CellIdentifier = @"Cell";
+    UITableViewCell* cell = [tableView
                              dequeueReusableCellWithIdentifier:CellIdentifier];
     if( cell == nil )
     {

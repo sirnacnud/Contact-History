@@ -17,6 +17,7 @@
 		AE77E4C5171BAE1A00459A84 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE77E4C4171BAE1A00459A84 /* AddressBookUI.framework */; };
 		AE92E48D173596D600B5EF02 /* icon-57.png in Resources */ = {isa = PBXBuildFile; fileRef = AE92E48B173596D600B5EF02 /* icon-57.png */; };
 		AE92E48E173596D600B5EF02 /* icon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = AE92E48C173596D600B5EF02 /* icon-114.png */; };
+		AE92E4921735A0EC00B5EF02 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE92E4911735A0EC00B5EF02 /* MBProgressHUD.m */; };
 		AEDB40B41719E6780003F048 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDB40B31719E6780003F048 /* UIKit.framework */; };
 		AEDB40B61719E6780003F048 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDB40B51719E6780003F048 /* Foundation.framework */; };
 		AEDB40B81719E6780003F048 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDB40B71719E6780003F048 /* CoreGraphics.framework */; };
@@ -44,6 +45,8 @@
 		AE77E4C4171BAE1A00459A84 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		AE92E48B173596D600B5EF02 /* icon-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-57.png"; sourceTree = "<group>"; };
 		AE92E48C173596D600B5EF02 /* icon-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-114.png"; sourceTree = "<group>"; };
+		AE92E4901735A0EC00B5EF02 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = ../MBProgressHUD/MBProgressHUD.h; sourceTree = "<group>"; };
+		AE92E4911735A0EC00B5EF02 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = ../MBProgressHUD/MBProgressHUD.m; sourceTree = "<group>"; };
 		AEDB40B01719E6780003F048 /* NumberCollector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NumberCollector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEDB40B31719E6780003F048 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AEDB40B51719E6780003F048 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -96,9 +99,19 @@
 			name = PullToRefresh;
 			sourceTree = "<group>";
 		};
+		AE92E48F1735A0D100B5EF02 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				AE92E4901735A0EC00B5EF02 /* MBProgressHUD.h */,
+				AE92E4911735A0EC00B5EF02 /* MBProgressHUD.m */,
+			);
+			name = MBProgressHUD;
+			sourceTree = "<group>";
+		};
 		AEDB40A71719E6780003F048 = {
 			isa = PBXGroup;
 			children = (
+				AE92E48F1735A0D100B5EF02 /* MBProgressHUD */,
 				AE1991A817260EBB007DF73D /* AudioToolbox.framework */,
 				AE1991A617260EAC007DF73D /* QuartzCore.framework */,
 				AE1991A117260E93007DF73D /* PullToRefresh */,
@@ -237,6 +250,7 @@
 				AEDB40C41719E6780003F048 /* NCAppDelegate.m in Sources */,
 				AEDB40D01719E6780003F048 /* NCTableViewController.m in Sources */,
 				AEDB40DA1719ECF50003F048 /* NCContact.m in Sources */,
+				AE92E4921735A0EC00B5EF02 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
