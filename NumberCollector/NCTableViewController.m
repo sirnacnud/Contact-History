@@ -202,7 +202,7 @@
 
 - (BOOL)personViewController:(ABPersonViewController *)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifierForValue
 {
-    return NO;
+    return YES;
 }
 
 - (void)pullToRefreshViewShouldRefresh:(PullToRefreshView *)view;
