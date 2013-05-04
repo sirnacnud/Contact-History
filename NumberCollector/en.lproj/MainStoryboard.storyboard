@@ -20,7 +20,7 @@
             </objects>
             <point key="canvasLocation" x="106" y="396"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Table View Controller - History-->
         <scene sceneID="38m-gk-7Wb">
             <objects>
                 <tableViewController id="lra-qq-31u" customClass="NCTableViewController" sceneMemberID="viewController">
@@ -44,7 +44,7 @@
                             <outlet property="delegate" destination="lra-qq-31u" id="ION-6X-esS"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="kZE-EP-alC"/>
+                    <navigationItem key="navigationItem" title="History" id="kZE-EP-alC"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UNG-QJ-agl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
