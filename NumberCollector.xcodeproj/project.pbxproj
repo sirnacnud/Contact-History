@@ -15,6 +15,8 @@
 		AE1991B117261382007DF73D /* pop.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE1991AD17261382007DF73D /* pop.wav */; };
 		AE1991B217261382007DF73D /* psst1.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE1991AE17261382007DF73D /* psst1.wav */; };
 		AE77E4C5171BAE1A00459A84 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE77E4C4171BAE1A00459A84 /* AddressBookUI.framework */; };
+		AE92E48D173596D600B5EF02 /* icon-57.png in Resources */ = {isa = PBXBuildFile; fileRef = AE92E48B173596D600B5EF02 /* icon-57.png */; };
+		AE92E48E173596D600B5EF02 /* icon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = AE92E48C173596D600B5EF02 /* icon-114.png */; };
 		AEDB40B41719E6780003F048 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDB40B31719E6780003F048 /* UIKit.framework */; };
 		AEDB40B61719E6780003F048 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDB40B51719E6780003F048 /* Foundation.framework */; };
 		AEDB40B81719E6780003F048 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDB40B71719E6780003F048 /* CoreGraphics.framework */; };
@@ -40,6 +42,8 @@
 		AE1991AD17261382007DF73D /* pop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = pop.wav; path = PullToRefresh/pop.wav; sourceTree = "<group>"; };
 		AE1991AE17261382007DF73D /* psst1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = psst1.wav; path = PullToRefresh/psst1.wav; sourceTree = "<group>"; };
 		AE77E4C4171BAE1A00459A84 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		AE92E48B173596D600B5EF02 /* icon-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-57.png"; sourceTree = "<group>"; };
+		AE92E48C173596D600B5EF02 /* icon-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-114.png"; sourceTree = "<group>"; };
 		AEDB40B01719E6780003F048 /* NumberCollector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NumberCollector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEDB40B31719E6780003F048 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AEDB40B51719E6780003F048 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -142,6 +146,8 @@
 		AEDB40BA1719E6780003F048 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AE92E48B173596D600B5EF02 /* icon-57.png */,
+				AE92E48C173596D600B5EF02 /* icon-114.png */,
 				AEDB40BB1719E6780003F048 /* NumberCollector-Info.plist */,
 				AEDB40BC1719E6780003F048 /* InfoPlist.strings */,
 				AEDB40BF1719E6780003F048 /* main.m */,
@@ -214,6 +220,8 @@
 				AE1991B017261382007DF73D /* arrow@2x.png in Resources */,
 				AE1991B117261382007DF73D /* pop.wav in Resources */,
 				AE1991B217261382007DF73D /* psst1.wav in Resources */,
+				AE92E48D173596D600B5EF02 /* icon-57.png in Resources */,
+				AE92E48E173596D600B5EF02 /* icon-114.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
