@@ -15,10 +15,8 @@
 
 @interface NCTableViewController ()
 
-@property (nonatomic,strong) NSMutableArray* contacts;
-@property (nonatomic,strong) NSMutableArray* dates;
-@property (nonatomic,strong) NSMutableArray* groupCounts;
-@property (nonatomic,strong) NSString* lastDate;
+@property (nonatomic,strong) NSMutableDictionary* contacts;
+@property (nonatomic,strong) NSArray* dates;
 @property (nonatomic,strong) PullToRefreshView* pullView;
 @property (nonatomic) ABAddressBookRef addressBook;
 
@@ -28,49 +26,17 @@
 
 @synthesize contacts = _contacts;
 @synthesize dates = _dates;
-@synthesize lastDate = _lastDate;
-@synthesize groupCounts = _groupCounts;
 @synthesize addressBook = _addressBook;
 @synthesize pullView = _pullView;
 
-- (NSMutableArray*)contacts
+- (NSMutableDictionary*)contacts
 {
     if( _contacts == Nil )
     {
-        _contacts = [[NSMutableArray alloc] init];
+        _contacts = [[NSMutableDictionary alloc] init];
     }
     
     return _contacts;
-}
-
-- (NSMutableArray*)dates
-{
-    if( _dates == Nil )
-    {
-        _dates = [[NSMutableArray alloc] init];
-    }
-    
-    return _dates;
-}
-
-- (NSMutableArray*)groupCounts
-{
-    if( _groupCounts == Nil )
-    {
-        _groupCounts = [[NSMutableArray alloc] init];
-    }
-    
-    return _groupCounts;
-}
-
-- (NSString*)lastDate
-{
-    if( _lastDate == Nil )
-    {
-        _lastDate = [[NSString alloc] init];
-    }
-    
-    return _lastDate;
 }
 
 - (void)viewDidLoad
@@ -123,7 +89,8 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[self.groupCounts objectAtIndex:section] intValue];
+    NSDate* date = [self.dates objectAtIndex:section];
+    return [[self.contacts objectForKey:date] count];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -133,7 +100,13 @@
 
 -(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return [self.dates objectAtIndex:section];
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterNoStyle];
+    
+    NSDate* date = [self.dates objectAtIndex:section];
+    
+    return [formatter stringFromDate:date];
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -148,15 +121,13 @@
                 reuseIdentifier:CellIdentifier];
     }
     
-    NSInteger row = 0;
+    NSInteger row = [indexPath row];;
     NSInteger section = [indexPath section];
     
-    for( int i = 0; i < section; ++i )
-    {
-        row = row + [[self.groupCounts objectAtIndex:i] intValue];
-    }
+    NSDate* date = [self.dates objectAtIndex:section];
+    NSMutableArray* contacts = [self.contacts objectForKey:date];
     
-    NCContact* contact = [self.contacts objectAtIndex:row + [indexPath row]];
+    NCContact* contact = [contacts objectAtIndex:row];
     
     if( [contact.firstName length] > 0 )
     {        
@@ -187,15 +158,13 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSInteger row = 0;
+    NSInteger row = [indexPath row];;
     NSInteger section = [indexPath section];
     
-    for( int i = 0; i < section; ++i )
-    {
-        row = row + [[self.groupCounts objectAtIndex:i] intValue];
-    }
+    NSDate* date = [self.dates objectAtIndex:section];
+    NSMutableArray* contacts = [self.contacts objectForKey:date];
     
-    NCContact* contact = [self.contacts objectAtIndex:row + [indexPath row]];
+    NCContact* contact = [contacts objectAtIndex:row];
     
     ABRecordRef ref = ABAddressBookGetPersonWithRecordID(self.addressBook, contact.recordId );
     
@@ -229,30 +198,19 @@
 {
     if( self.addressBook )
     {
-        self.lastDate = nil;
-        [self.dates removeAllObjects];
         [self.contacts removeAllObjects];
-        [self.groupCounts removeAllObjects];
         
-        CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople( self.addressBook );
+        ABRecordRef defaultSource = ABAddressBookCopyDefaultSource( self.addressBook );
+        
+        CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeopleInSource( self.addressBook, defaultSource );
         int numberOfPeople = CFArrayGetCount( allPeople );
         
         CFMutableArrayRef allPeopleMutable = CFArrayCreateMutableCopy( kCFAllocatorDefault, numberOfPeople, allPeople );
         
-        // Reverse the list so it is sorted newest to oldest
-        for( int i = 0; i < numberOfPeople / 2; ++i )
-        {
-            const void* first = CFArrayGetValueAtIndex( allPeopleMutable, i );
-            const void* last = CFArrayGetValueAtIndex( allPeopleMutable, numberOfPeople - 1 - i );
-            
-            CFArraySetValueAtIndex( allPeopleMutable, i, last );
-            CFArraySetValueAtIndex( allPeopleMutable, numberOfPeople - i, first );
-        }
-        
         CFRelease( allPeople );
         
-        NSString* date = Nil;
-        NSInteger groupCount = 0;
+        NSMutableArray* dates = [[NSMutableArray alloc] init];
+        
         for( int i = 0; i < numberOfPeople; i++ )
         {
             ABRecordRef ref = CFArrayGetValueAtIndex( allPeopleMutable, i );
@@ -293,33 +251,24 @@
                 [formatter setDateStyle:NSDateFormatterMediumStyle];
                 [formatter setTimeStyle:NSDateFormatterNoStyle];
                 
-                date = [formatter stringFromDate:creationDate];
+                NSString* dateString = [formatter stringFromDate:creationDate];
+                NSDate* shortenedDate = [formatter dateFromString:dateString];
                 
-                if( [self.lastDate compare:date] != NSOrderedSame )
+                NSMutableArray* dateGroup = [self.contacts objectForKey:shortenedDate];
+                
+                if( !dateGroup )
                 {
-                    self.lastDate = date;
-                    [self.dates addObject:date];
-                    
-                    if( groupCount != 0 )
-                    {
-                        [self.groupCounts addObject:[NSNumber numberWithInteger:groupCount]];
-                        groupCount = 0;
-                    }
-                    
-                    groupCount++;
-                }
-                else
-                {
-                    groupCount++;
+                    dateGroup = [[NSMutableArray alloc] init];
+                    [self.contacts setObject:dateGroup forKey:shortenedDate];
+                    [dates addObject:shortenedDate];
                 }
                 
-                contact.creationDate = self.lastDate;
-                
-                [self.contacts addObject:contact];
+                [dateGroup addObject:contact];
             }
         }
         
-        [self.groupCounts addObject:[NSNumber numberWithInteger:groupCount]];
+        [dates sortUsingSelector:@selector(compare:)];
+        self.dates = [[dates reverseObjectEnumerator] allObjects];
         
         CFRelease( allPeopleMutable );
     }

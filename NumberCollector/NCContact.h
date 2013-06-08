@@ -15,7 +15,6 @@
 @property (nonatomic,strong) NSString* lastName;
 @property (nonatomic,strong) NSString* company;
 @property (nonatomic,strong) NSString* phoneNumber;
-@property (nonatomic,strong) NSString* creationDate;
 @property (nonatomic) NSInteger dateGroup;
 @property (nonatomic) ABRecordID recordId;
 
