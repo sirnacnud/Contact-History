@@ -9,8 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <AddressBookUI/AddressBookUI.h>
 
+#import "NCGroupsViewController.h"
 #import "PullToRefreshView.h"
 
-@interface NCTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, ABPersonViewControllerDelegate, PullToRefreshViewDelegate>
+@interface NCTableViewController : UITableViewController <UITableViewDataSource,
+                                                          UITableViewDelegate,
+                                                          ABPersonViewControllerDelegate,
+                                                          PullToRefreshViewDelegate,
+                                                          NCGroupsViewControllerDelegate>
 
 @end

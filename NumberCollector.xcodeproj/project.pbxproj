@@ -14,6 +14,7 @@
 		AE1991B017261382007DF73D /* arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE1991AC17261382007DF73D /* arrow@2x.png */; };
 		AE1991B117261382007DF73D /* pop.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE1991AD17261382007DF73D /* pop.wav */; };
 		AE1991B217261382007DF73D /* psst1.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE1991AE17261382007DF73D /* psst1.wav */; };
+		AE70E17C178892A200E5901C /* NCGroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE70E17B178892A200E5901C /* NCGroupsViewController.m */; };
 		AE77E4C5171BAE1A00459A84 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE77E4C4171BAE1A00459A84 /* AddressBookUI.framework */; };
 		AE92E48D173596D600B5EF02 /* icon-57.png in Resources */ = {isa = PBXBuildFile; fileRef = AE92E48B173596D600B5EF02 /* icon-57.png */; };
 		AE92E48E173596D600B5EF02 /* icon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = AE92E48C173596D600B5EF02 /* icon-114.png */; };
@@ -42,6 +43,8 @@
 		AE1991AC17261382007DF73D /* arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "arrow@2x.png"; path = "PullToRefresh/arrow@2x.png"; sourceTree = "<group>"; };
 		AE1991AD17261382007DF73D /* pop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = pop.wav; path = PullToRefresh/pop.wav; sourceTree = "<group>"; };
 		AE1991AE17261382007DF73D /* psst1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = psst1.wav; path = PullToRefresh/psst1.wav; sourceTree = "<group>"; };
+		AE70E17A178892A200E5901C /* NCGroupsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCGroupsViewController.h; sourceTree = "<group>"; };
+		AE70E17B178892A200E5901C /* NCGroupsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCGroupsViewController.m; sourceTree = "<group>"; };
 		AE77E4C4171BAE1A00459A84 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		AE92E48B173596D600B5EF02 /* icon-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-57.png"; sourceTree = "<group>"; };
 		AE92E48C173596D600B5EF02 /* icon-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-114.png"; sourceTree = "<group>"; };
@@ -152,6 +155,8 @@
 				AEDB40CE1719E6780003F048 /* NCTableViewController.h */,
 				AEDB40CF1719E6780003F048 /* NCTableViewController.m */,
 				AEDB40BA1719E6780003F048 /* Supporting Files */,
+				AE70E17A178892A200E5901C /* NCGroupsViewController.h */,
+				AE70E17B178892A200E5901C /* NCGroupsViewController.m */,
 			);
 			path = NumberCollector;
 			sourceTree = "<group>";
@@ -251,6 +256,7 @@
 				AEDB40D01719E6780003F048 /* NCTableViewController.m in Sources */,
 				AEDB40DA1719ECF50003F048 /* NCContact.m in Sources */,
 				AE92E4921735A0EC00B5EF02 /* MBProgressHUD.m in Sources */,
+				AE70E17C178892A200E5901C /* NCGroupsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

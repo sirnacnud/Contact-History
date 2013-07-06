@@ -8,6 +8,7 @@
 
 #import "NCTableViewController.h"
 #import "NCContact.h"
+#import "NCGroupsViewController.h"
 #import "MBProgressHUD.h"
 
 #import <AddressBook/AddressBook.h>
@@ -272,6 +273,22 @@
         
         CFRelease( allPeopleMutable );
     }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if( [segue.identifier isEqualToString:@"Groups"] )
+    {
+        NCGroupsViewController* viewController = segue.destinationViewController;
+        viewController.delegate = self;
+    }
+}
+
+- (void)didDismissPresentedViewController
+{
+    // Add code that refreshes the list
+    
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 @end
