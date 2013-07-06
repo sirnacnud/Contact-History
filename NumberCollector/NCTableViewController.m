@@ -47,11 +47,11 @@
     [self.pullView setDelegate:self];
     [self.tableView addSubview:self.pullView];
     
-    self.addressBook = ABAddressBookCreate();
+    self.addressBook = ABAddressBookCreateWithOptions( NULL, NULL );
     
     __block BOOL accessGranted = NO;
     
-    // we're on iOS 6
+    // We're on iOS 6
     if( ABAddressBookRequestAccessWithCompletion != NULL )
     { 
         dispatch_semaphore_t sema = dispatch_semaphore_create( 0 );
@@ -63,7 +63,7 @@
         
         dispatch_semaphore_wait( sema, DISPATCH_TIME_FOREVER );
     }
-    // we're on iOS 5 or older
+    // We're on iOS 5 or older
     else
     {
         accessGranted = YES;
