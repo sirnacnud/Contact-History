@@ -8,6 +8,7 @@
 
 #import "NCTableViewController.h"
 #import "NCContact.h"
+#import "NCGroupsManager.h"
 #import "NCGroupsViewController.h"
 #import "MBProgressHUD.h"
 
@@ -44,6 +45,12 @@
 {
     [super viewDidLoad];
     
+    // Check if group setting is present, if not set to default
+    if( [NCGroupsManager getGroup] == GROUP_INV )
+    {
+        [NCGroupsManager setGroup:GROUP_DEFAULT];
+    }
+    
     self.pullView = [[PullToRefreshView alloc] initWithScrollView:(UIScrollView *) self.tableView];
     [self.pullView setDelegate:self];
     [self.tableView addSubview:self.pullView];
@@ -72,19 +79,7 @@
     
     if( accessGranted )
     {
-        MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.labelText = @"Loading";
-        
-        self.tableView.userInteractionEnabled = NO;
-        
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-            [self reloadContactHistory];
-            [self.tableView reloadData];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
-                self.tableView.userInteractionEnabled = YES;
-            });
-        });
+        [self refreshContactHistory];
     }
 }
 
@@ -201,9 +196,20 @@
     {
         [self.contacts removeAllObjects];
         
-        ABRecordRef defaultSource = ABAddressBookCopyDefaultSource( self.addressBook );
+        ContactGroup currentGroup = [NCGroupsManager getGroup];
         
-        CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeopleInSource( self.addressBook, defaultSource );
+        CFArrayRef allPeople;
+        
+        if( currentGroup == GROUP_DEFAULT )
+        {
+            ABRecordRef defaultSource = ABAddressBookCopyDefaultSource( self.addressBook );
+            allPeople = ABAddressBookCopyArrayOfAllPeopleInSource( self.addressBook, defaultSource );
+        }
+        else
+        {
+            allPeople = ABAddressBookCopyArrayOfAllPeople( self.addressBook );
+        }
+        
         int numberOfPeople = CFArrayGetCount( allPeople );
         
         CFMutableArrayRef allPeopleMutable = CFArrayCreateMutableCopy( kCFAllocatorDefault, numberOfPeople, allPeople );
@@ -275,6 +281,24 @@
     }
 }
 
+- (void)refreshContactHistory
+{
+    MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Loading";
+    
+    self.tableView.userInteractionEnabled = NO;
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [self reloadContactHistory];
+        [self.pullView refreshLastUpdatedDate];
+        [self.tableView reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            self.tableView.userInteractionEnabled = YES;
+        });
+    });
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if( [segue.identifier isEqualToString:@"Groups"] )
@@ -286,7 +310,7 @@
 
 - (void)didDismissPresentedViewController
 {
-    // Add code that refreshes the list
+    [self refreshContactHistory];
     
     [self dismissViewControllerAnimated:YES completion:NULL];
 }

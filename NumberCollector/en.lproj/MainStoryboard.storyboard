@@ -98,10 +98,10 @@
             </objects>
             <point key="canvasLocation" x="924" y="404"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Groups Table View Controller-->
         <scene sceneID="VJq-H9-QJ5">
             <objects>
-                <tableViewController id="Ytf-QS-pnM" sceneMemberID="viewController">
+                <tableViewController id="Ytf-QS-pnM" customClass="NCGroupsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="mlO-0h-u5t">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -171,6 +171,9 @@
         </scene>
     </scenes>
     <classes>
+        <class className="NCGroupsTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NCGroupsTableViewController.h"/>
+        </class>
         <class className="NCGroupsViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NCGroupsViewController.h"/>
             <relationships>
