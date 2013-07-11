@@ -17,18 +17,20 @@
 
 @interface NCTableViewController ()
 
+@property (nonatomic) ABAddressBookRef addressBook;
+@property (nonatomic) BOOL addressBookAccess;
 @property (nonatomic,strong) NSMutableDictionary* contacts;
 @property (nonatomic,strong) NSArray* dates;
 @property (nonatomic,strong) PullToRefreshView* pullView;
-@property (nonatomic) ABAddressBookRef addressBook;
 
 @end
 
 @implementation NCTableViewController
 
+@synthesize addressBook = _addressBook;
+@synthesize addressBookAccess = _addressBookAccess;
 @synthesize contacts = _contacts;
 @synthesize dates = _dates;
-@synthesize addressBook = _addressBook;
 @synthesize pullView = _pullView;
 
 - (NSMutableDictionary*)contacts
@@ -44,6 +46,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //********************************************************
+    // TODO: Figure out if we need to remove this on shutdown
+    //********************************************************
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                          selector:@selector(reloadFromNotificatonCenter:)
+                                          name:UIApplicationDidBecomeActiveNotification object:nil];
     
     // Check if group setting is present, if not set to default
     if( [NCGroupsManager getGroup] == GROUP_INV )
@@ -77,10 +86,7 @@
         accessGranted = YES;
     }
     
-    if( accessGranted )
-    {
-        [self refreshContactHistory];
-    }
+    self.addressBookAccess = accessGranted;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -185,9 +191,11 @@
 
 - (void)pullToRefreshViewShouldRefresh:(PullToRefreshView *)view;
 {
-    [self reloadContactHistory];
-    [self.tableView reloadData];
-    [self.pullView finishedLoading];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self reloadContactHistory];
+        [self.tableView reloadData];
+        [self.pullView finishedLoading];
+    });
 }
 
 - (void)reloadContactHistory
@@ -283,20 +291,32 @@
 
 - (void)refreshContactHistory
 {
-    MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.labelText = @"Loading";
-    
-    self.tableView.userInteractionEnabled = NO;
-    
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        [self reloadContactHistory];
-        [self.pullView refreshLastUpdatedDate];
-        [self.tableView reloadData];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-            self.tableView.userInteractionEnabled = YES;
+    if( self.addressBookAccess )
+    {
+        MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.labelText = @"Loading";
+
+        self.tableView.userInteractionEnabled = NO;
+
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            [self reloadContactHistory];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.pullView refreshLastUpdatedDate];
+                [self.tableView reloadData];
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                self.tableView.userInteractionEnabled = YES;
+            });
         });
-    });
+    }
+    else
+    {
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Error!"
+                                                    message:@"Enable Contact Permissions Under Settings -> Privacy -> Contacts"
+                                                    delegate:nil
+                                                    cancelButtonTitle:@"OK"
+                                                    otherButtonTitles:nil];
+        [message show];
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -313,6 +333,11 @@
     [self refreshContactHistory];
     
     [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+ -(void)reloadFromNotificatonCenter:(NSNotification *)notification
+{
+    [self refreshContactHistory];
 }
 
 @end
