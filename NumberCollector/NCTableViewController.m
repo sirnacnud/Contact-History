@@ -48,9 +48,6 @@
 {
     [super viewDidLoad];
     
-    //********************************************************
-    // TODO: Figure out if we need to remove this on shutdown
-    //********************************************************
     [[NSNotificationCenter defaultCenter] addObserver:self
                                           selector:@selector(reloadFromNotificatonCenter:)
                                           name:UIApplicationDidBecomeActiveNotification object:nil];
@@ -88,6 +85,16 @@
     }
     
     self.addressBookAccess = accessGranted;
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    
+    if( [self isViewLoaded] && self.view.window )
+    {
+        [[NSNotificationCenter defaultCenter]removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
+    }
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
