@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#import "NCGroupsManager.h"
+
 @protocol NCGroupsViewControllerDelegate <NSObject>
+
+@property (nonatomic) ContactGroup selectedGroup;
 
 - (void)didDismissPresentedViewController;
 

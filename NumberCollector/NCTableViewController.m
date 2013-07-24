@@ -32,6 +32,7 @@
 @synthesize contacts = _contacts;
 @synthesize dates = _dates;
 @synthesize pullView = _pullView;
+@synthesize selectedGroup = _selectedGroup;
 
 - (NSMutableDictionary*)contacts
 {
@@ -330,7 +331,11 @@
 
 - (void)didDismissPresentedViewController
 {
-    [self refreshContactHistory];
+    if( self.selectedGroup != [NCGroupsManager getGroup] )
+    {
+        [NCGroupsManager setGroup:self.selectedGroup];
+        [self refreshContactHistory];
+    }
     
     [self dismissViewControllerAnimated:YES completion:NULL];
 }

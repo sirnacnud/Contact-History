@@ -8,6 +8,7 @@
 
 #import "NCGroupsTableViewController.h"
 
+#import "NCGroupsViewController.h"
 #import "NCGroupsManager.h"
 
 @interface NCGroupsTableViewController ()
@@ -41,7 +42,8 @@
             group = GROUP_ALL;
         }
         
-        [NCGroupsManager setGroup:group];
+        NCGroupsViewController* parentViewController = (NCGroupsViewController*)self.parentViewController;
+        parentViewController.delegate.selectedGroup = group;
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
