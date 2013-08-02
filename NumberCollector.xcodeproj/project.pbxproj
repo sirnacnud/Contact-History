@@ -162,11 +162,11 @@
 				AEDB40CB1719E6780003F048 /* MainStoryboard.storyboard */,
 				AEDB40CE1719E6780003F048 /* NCTableViewController.h */,
 				AEDB40CF1719E6780003F048 /* NCTableViewController.m */,
-				AEDB40BA1719E6780003F048 /* Supporting Files */,
 				AE70E17A178892A200E5901C /* NCGroupsViewController.h */,
 				AE70E17B178892A200E5901C /* NCGroupsViewController.m */,
 				AE70E17D178896CC00E5901C /* NCGroupsTableViewController.h */,
 				AE70E17E178896CC00E5901C /* NCGroupsTableViewController.m */,
+				AEDB40BA1719E6780003F048 /* Supporting Files */,
 			);
 			path = NumberCollector;
 			sourceTree = "<group>";
