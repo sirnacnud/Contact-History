@@ -19,6 +19,7 @@
 
 @property (nonatomic) ABAddressBookRef addressBook;
 @property (nonatomic) BOOL addressBookAccess;
+@property (nonatomic) BOOL addressBookWaiting;
 @property (nonatomic,strong) NSMutableDictionary* contacts;
 @property (nonatomic,strong) NSArray* dates;
 @property (nonatomic,strong) PullToRefreshView* pullView;
@@ -29,6 +30,7 @@
 
 @synthesize addressBook = _addressBook;
 @synthesize addressBookAccess = _addressBookAccess;
+@synthesize addressBookWaiting = _addressBookWaiting;
 @synthesize contacts = _contacts;
 @synthesize dates = _dates;
 @synthesize pullView = _pullView;
@@ -66,28 +68,24 @@
     [self.tableView addSubview:self.pullView];
     
     self.addressBook = ABAddressBookCreateWithOptions( NULL, NULL );
-    
-    __block BOOL accessGranted = NO;
-    
-    // We're on iOS 6
-    if( ABAddressBookRequestAccessWithCompletion != NULL )
-    { 
-        dispatch_semaphore_t sema = dispatch_semaphore_create( 0 );
-        
-        ABAddressBookRequestAccessWithCompletion( self.addressBook, ^( bool granted, CFErrorRef error ) {
-            accessGranted = granted;
-            dispatch_semaphore_signal( sema );
-            });
-        
-        dispatch_semaphore_wait( sema, DISPATCH_TIME_FOREVER );
+
+    if( ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined )
+    {
+        self.addressBookWaiting = YES;
+        ABAddressBookRequestAccessWithCompletion( self.addressBook, ^(bool granted, CFErrorRef error) {
+            
+            self.addressBookWaiting = NO;
+            self.addressBookAccess = YES;
+        });
     }
-    // We're on iOS 5 or older
+    else if( ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized )
+    {
+        self.addressBookAccess = YES;
+    }
     else
     {
-        accessGranted = YES;
+        self.addressBookAccess = NO;
     }
-    
-    self.addressBookAccess = accessGranted;
 }
 
 - (void)didReceiveMemoryWarning
@@ -352,7 +350,10 @@
 
  -(void)reloadFromNotificatonCenter:(NSNotification *)notification
 {
-    [self refreshContactHistory];
+    if( !self.addressBookWaiting )
+    {
+        [self refreshContactHistory];
+    }
 }
 
 @end
