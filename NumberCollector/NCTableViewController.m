@@ -211,6 +211,8 @@
 {
     if( self.addressBook )
     {
+        ABAddressBookRevert( self.addressBook );
+        
         [self.contacts removeAllObjects];
         
         ContactGroup currentGroup = [NCGroupsManager getGroup];
