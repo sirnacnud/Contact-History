@@ -12,6 +12,9 @@
 #import "NCGroupsViewController.h"
 #import "PullToRefreshView.h"
 
+/**
+ Main TableViewController for the list of contacts
+ */
 @interface NCTableViewController : UITableViewController <UITableViewDataSource,
                                                           UITableViewDelegate,
                                                           ABPersonViewControllerDelegate,

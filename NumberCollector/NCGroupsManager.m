@@ -8,12 +8,23 @@
 
 #import "NCGroupsManager.h"
 
+/**
+ Keys for user defaults
+ */
 #define GROUP_KEY       @"group"
+
+/**
+ Values for user defaults
+ */
 #define DEFAULT_VALUE   @"default"
 #define ALL_VALUE       @"all"
 
 @implementation NCGroupsManager
 
+/**
+ Gets the currently selected contact group
+ @returns Currently select contact group
+ */
 + (ContactGroup)getGroup
 {
     ContactGroup group = GROUP_INV;
@@ -36,6 +47,10 @@
     return group;
 }
 
+/**
+ Sets the currently selected contact group
+ @param group Group to set
+ */
 + (void)setGroup:(ContactGroup)group
 {
     if( group != GROUP_INV )

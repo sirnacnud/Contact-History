@@ -10,8 +10,14 @@
 
 #import "NCGroupsManager.h"
 
+/**
+ Protocol for handling the ViewController
+ */
 @protocol NCGroupsViewControllerDelegate <NSObject>
 
+/**
+ Selected group
+ */
 @property (nonatomic) ContactGroup selectedGroup;
 
 - (void)didDismissPresentedViewController;
@@ -20,7 +26,9 @@
 
 @interface NCGroupsViewController : UIViewController
 
-
+/**
+ The NCGroupsViewControllerDelegate
+ */
 @property (nonatomic, weak) id<NCGroupsViewControllerDelegate> delegate;
 
 @end

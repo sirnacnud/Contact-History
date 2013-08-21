@@ -17,11 +17,35 @@
 
 @interface NCTableViewController ()
 
+/**
+ Addres book object
+ */
 @property (nonatomic) ABAddressBookRef addressBook;
+
+/**
+ Whether or not we got access to the address book
+ */
 @property (nonatomic) BOOL addressBookAccess;
+
+/**
+ Whether or not we are waiting on the user to give
+ us access to the address book
+ */
 @property (nonatomic) BOOL addressBookWaiting;
+
+/**
+ Contacts fetched from the address book
+ */
 @property (nonatomic,strong) NSMutableDictionary* contacts;
+
+/**
+ Array of dates the contacts were added
+ */
 @property (nonatomic,strong) NSArray* dates;
+
+/**
+ PullToRefreshView displayed when the list is refreshing
+ */
 @property (nonatomic,strong) PullToRefreshView* pullView;
 
 @end
@@ -36,6 +60,10 @@
 @synthesize pullView = _pullView;
 @synthesize selectedGroup = _selectedGroup;
 
+/**
+ Gets the contacts mutable dictionary
+ @returns contacts mutable dictionary
+ */
 - (NSMutableDictionary*)contacts
 {
     if( _contacts == Nil )
@@ -46,6 +74,9 @@
     return _contacts;
 }
 
+/**
+ Called when the view loads
+ */
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -63,7 +94,7 @@
         [NCGroupsManager setGroup:GROUP_DEFAULT];
     }
     
-    self.pullView = [[PullToRefreshView alloc] initWithScrollView:(UIScrollView *) self.tableView];
+    self.pullView = [[PullToRefreshView alloc] initWithScrollView:(UIScrollView*)self.tableView];
     [self.pullView setDelegate:self];
     [self.tableView addSubview:self.pullView];
     
@@ -72,8 +103,8 @@
     if( ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined )
     {
         self.addressBookWaiting = YES;
+        
         ABAddressBookRequestAccessWithCompletion( self.addressBook, ^(bool granted, CFErrorRef error) {
-            
             self.addressBookWaiting = NO;
             self.addressBookAccess = YES;
         });
@@ -88,6 +119,9 @@
     }
 }
 
+/**
+ Called when we recieve a low memory warning
+ */
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -98,17 +132,34 @@
     }
 }
 
+/**
+ Gets the number of rows in a section of a TableView
+ @param tableView TableView
+ @param section Section
+ @returns Number of rows
+ */
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSDate* date = [self.dates objectAtIndex:section];
     return [[self.contacts objectForKey:date] count];
 }
 
+/**
+ Gets the number of sections in a TableView
+ @param tableView TableView
+ @returns Number of sections
+ */
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return [self.dates count];
 }
 
+/**
+ Gets the title for header in section
+ @param tableView TableView
+ @param section Section
+ @returns Title
+ */
 -(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
@@ -120,6 +171,12 @@
     return [formatter stringFromDate:date];
 }
 
+/**
+ Gets the cell of a row in the TableView
+ @param tableView TableView
+ @param indexPath IndexPath describing the row
+ @returns The cell for the row
+ */
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString* CellIdentifier = @"Cell";
@@ -167,6 +224,11 @@
     return cell;
 }
 
+/**
+ Handles when a row is selected in the TableView
+ @param tableView TableView
+ @param indexPath IndexPath for selected row
+ */
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger row = [indexPath row];;
@@ -181,8 +243,8 @@
     
     if( ref )
     {
-        // Need to add checks to make sure the record Id
-        // didn't change for the contact
+        // Need to add checks to make sure the
+        // record ID didn't change for the contact
         
         ABPersonViewController *view = [[ABPersonViewController alloc] init];
         
@@ -193,11 +255,25 @@
     }
 }
 
+/**
+ Handles whether or not the default action should be
+ performed when the user clicks on a field in the
+ person view controller
+ @param personViewController Person view controller
+ @param person Person record
+ @param property Property of person record
+ @param identifier Value indentifier
+ @returns YES if we should do the default, NO otherwise
+ **/
 - (BOOL)personViewController:(ABPersonViewController *)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifierForValue
 {
     return YES;
 }
 
+/**
+ Called when the PullToRefreshView is pulled down via the TableView
+ @param view PullToRefreshView
+ */
 - (void)pullToRefreshViewShouldRefresh:(PullToRefreshView *)view;
 {
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -207,6 +283,9 @@
     });
 }
 
+/**
+ Reloads the contact history from the address book
+ */
 - (void)reloadContactHistory
 {
     if( self.addressBook )
@@ -300,6 +379,11 @@
     }
 }
 
+/**
+ Refreshs the contact history asynchronously.
+ If we don't have access to the address book,
+ an alert is displayed.
+ */
 - (void)refreshContactHistory
 {
     if( self.addressBookAccess )
@@ -330,6 +414,11 @@
     }
 }
 
+/**
+ Prepares for the segue to the groups view controller
+ @param segue Segue in use
+ @param sender Sender
+ */
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if( [segue.identifier isEqualToString:@"Groups"] )
@@ -339,6 +428,9 @@
     }
 }
 
+/**
+ Called when the NCGroupsViewController is dimissed
+ */
 - (void)didDismissPresentedViewController
 {
     if( self.selectedGroup != [NCGroupsManager getGroup] )
@@ -350,6 +442,10 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
+/**
+ Called when we need to reload because our app has focus
+ @param notification Notification from notification center
+ */
  -(void)reloadFromNotificatonCenter:(NSNotification *)notification
 {
     if( !self.addressBookWaiting )

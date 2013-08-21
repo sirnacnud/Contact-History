@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ Different contact groups the user can select
+ */
 typedef enum contactGroup
 {
     GROUP_DEFAULT,
@@ -16,6 +19,9 @@ typedef enum contactGroup
     GROUP_INV
 } ContactGroup;
 
+/**
+ Manages which group of contacts is selected
+ */
 @interface NCGroupsManager : NSObject
 
 + (ContactGroup)getGroup;

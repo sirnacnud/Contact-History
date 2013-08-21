@@ -16,6 +16,11 @@
 
 @synthesize delegate = _delegate;
 
+/**
+ Called when the done button is clicked
+ @param sender
+ @returns action
+ */
 - (IBAction)hitDone:(id)sender
 {
     [self.delegate didDismissPresentedViewController];

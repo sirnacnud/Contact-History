@@ -13,12 +13,20 @@
 
 @interface NCGroupsTableViewController ()
 
+/**
+ Currently checked group row
+ */
 @property (nonatomic,strong) NSIndexPath* checkedRow;
 
 @end
 
 @implementation NCGroupsTableViewController
 
+/**
+ Handles when a row is selected in the TableView
+ @param tableView TableView
+ @param indexPath IndexPath for selected row
+ */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if( indexPath.section == 0 && [self.checkedRow compare:indexPath] != NSOrderedSame )
@@ -49,6 +57,12 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
+/**
+ Gets the cell of a row in the TableView
+ @param tableView TableView
+ @param indexPath IndexPath describing the row
+ @returns The cell for the row
+ */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell* cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
