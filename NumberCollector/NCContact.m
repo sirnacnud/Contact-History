@@ -14,7 +14,6 @@
 @synthesize lastName = _lastName;
 @synthesize company = _company;
 @synthesize phoneNumber = _phoneNumber;
-@synthesize dateGroup = _dateGroup;
 @synthesize recordId = _recordId;
 
 @end
