@@ -308,7 +308,7 @@
             allPeople = ABAddressBookCopyArrayOfAllPeople( self.addressBook );
         }
         
-        int numberOfPeople = CFArrayGetCount( allPeople );
+        CFIndex numberOfPeople = CFArrayGetCount( allPeople );
         
         CFMutableArrayRef allPeopleMutable = CFArrayCreateMutableCopy( kCFAllocatorDefault, numberOfPeople, allPeople );
         
@@ -316,7 +316,7 @@
         
         NSMutableArray* dates = [[NSMutableArray alloc] init];
         
-        for( int i = 0; i < numberOfPeople; i++ )
+        for( CFIndex i = 0; i < numberOfPeople; i++ )
         {
             ABRecordRef ref = CFArrayGetValueAtIndex( allPeopleMutable, i );
             
