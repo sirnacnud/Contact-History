@@ -96,6 +96,7 @@
         ABAddressBookRequestAccessWithCompletion( self.addressBook, ^(bool granted, CFErrorRef error) {
             self.addressBookWaiting = NO;
             self.addressBookAccess = YES;
+            [self refreshContactHistory];
         });
     }
     else if( ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized )
