@@ -15,13 +15,13 @@
 		AE1991B117261382007DF73D /* pop.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE1991AD17261382007DF73D /* pop.wav */; };
 		AE1991B217261382007DF73D /* psst1.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE1991AE17261382007DF73D /* psst1.wav */; };
 		AE37445717BDA80F00D7428E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE37445617BDA80F00D7428E /* Default-568h@2x.png */; };
+		AE5A96901A621BE600053D0C /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5A968F1A621BE600053D0C /* MBProgressHUD.m */; };
 		AE70E17C178892A200E5901C /* NCGroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE70E17B178892A200E5901C /* NCGroupsViewController.m */; };
 		AE70E17F178896CC00E5901C /* NCGroupsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE70E17E178896CC00E5901C /* NCGroupsTableViewController.m */; };
 		AE70E182178897AE00E5901C /* NCGroupsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AE70E181178897AE00E5901C /* NCGroupsManager.m */; };
 		AE77E4C5171BAE1A00459A84 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE77E4C4171BAE1A00459A84 /* AddressBookUI.framework */; };
 		AE92E48D173596D600B5EF02 /* icon-57.png in Resources */ = {isa = PBXBuildFile; fileRef = AE92E48B173596D600B5EF02 /* icon-57.png */; };
 		AE92E48E173596D600B5EF02 /* icon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = AE92E48C173596D600B5EF02 /* icon-114.png */; };
-		AE92E4921735A0EC00B5EF02 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE92E4911735A0EC00B5EF02 /* MBProgressHUD.m */; };
 		AECE60B017BDA79A00E19306 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = AECE60AE17BDA79A00E19306 /* Default.png */; };
 		AECE60B117BDA79A00E19306 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AECE60AF17BDA79A00E19306 /* Default@2x.png */; };
 		AEDB40B41719E6780003F048 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDB40B31719E6780003F048 /* UIKit.framework */; };
@@ -46,6 +46,9 @@
 		AE1991AD17261382007DF73D /* pop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = pop.wav; path = PullToRefresh/pop.wav; sourceTree = "<group>"; };
 		AE1991AE17261382007DF73D /* psst1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = psst1.wav; path = PullToRefresh/psst1.wav; sourceTree = "<group>"; };
 		AE37445617BDA80F00D7428E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		AE5A968D1A621BE600053D0C /* MBProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MBProgressHUD-Prefix.pch"; path = "MBProgressHUD/MBProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
+		AE5A968E1A621BE600053D0C /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = MBProgressHUD/MBProgressHUD.h; sourceTree = "<group>"; };
+		AE5A968F1A621BE600053D0C /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = MBProgressHUD/MBProgressHUD.m; sourceTree = "<group>"; };
 		AE70E17A178892A200E5901C /* NCGroupsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCGroupsViewController.h; sourceTree = "<group>"; };
 		AE70E17B178892A200E5901C /* NCGroupsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCGroupsViewController.m; sourceTree = "<group>"; };
 		AE70E17D178896CC00E5901C /* NCGroupsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCGroupsTableViewController.h; sourceTree = "<group>"; };
@@ -55,8 +58,6 @@
 		AE77E4C4171BAE1A00459A84 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		AE92E48B173596D600B5EF02 /* icon-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-57.png"; sourceTree = "<group>"; };
 		AE92E48C173596D600B5EF02 /* icon-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-114.png"; sourceTree = "<group>"; };
-		AE92E4901735A0EC00B5EF02 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = ../MBProgressHUD/MBProgressHUD.h; sourceTree = "<group>"; };
-		AE92E4911735A0EC00B5EF02 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = ../MBProgressHUD/MBProgressHUD.m; sourceTree = "<group>"; };
 		AECE60AE17BDA79A00E19306 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		AECE60AF17BDA79A00E19306 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		AEDB40B01719E6780003F048 /* Contact History.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Contact History.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,8 +112,9 @@
 		AE92E48F1735A0D100B5EF02 /* MBProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
-				AE92E4901735A0EC00B5EF02 /* MBProgressHUD.h */,
-				AE92E4911735A0EC00B5EF02 /* MBProgressHUD.m */,
+				AE5A968D1A621BE600053D0C /* MBProgressHUD-Prefix.pch */,
+				AE5A968E1A621BE600053D0C /* MBProgressHUD.h */,
+				AE5A968F1A621BE600053D0C /* MBProgressHUD.m */,
 			);
 			name = MBProgressHUD;
 			sourceTree = "<group>";
@@ -264,8 +266,8 @@
 				AEDB40C01719E6780003F048 /* main.m in Sources */,
 				AEDB40C41719E6780003F048 /* NCAppDelegate.m in Sources */,
 				AEDB40D01719E6780003F048 /* NCTableViewController.m in Sources */,
+				AE5A96901A621BE600053D0C /* MBProgressHUD.m in Sources */,
 				AEDB40DA1719ECF50003F048 /* NCContact.m in Sources */,
-				AE92E4921735A0EC00B5EF02 /* MBProgressHUD.m in Sources */,
 				AE70E17C178892A200E5901C /* NCGroupsViewController.m in Sources */,
 				AE70E17F178896CC00E5901C /* NCGroupsTableViewController.m in Sources */,
 				AE70E182178897AE00E5901C /* NCGroupsManager.m in Sources */,
