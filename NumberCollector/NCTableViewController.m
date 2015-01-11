@@ -110,6 +110,7 @@
 }
 
 /**
+ Called when the address book is changed
  @param addressBook Address book that changed
  @param info Info about the change
  @param context Self pointer
