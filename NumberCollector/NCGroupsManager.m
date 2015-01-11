@@ -11,13 +11,13 @@
 /**
  Keys for user defaults
  */
-#define GROUP_KEY       @"group"
+NSString* const NCGroupsManagerGroupKey = @"group";
 
 /**
  Values for user defaults
  */
-#define DEFAULT_VALUE   @"default"
-#define ALL_VALUE       @"all"
+NSString* const NCGroupsManagerDefaultValue = @"default";
+NSString* const NCGroupsManagerAllValue = @"all";
 
 @implementation NCGroupsManager
 
@@ -30,15 +30,15 @@
     ContactGroup group = GROUP_INV;
     
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    NSString* currentGroup = [defaults stringForKey:GROUP_KEY];
+    NSString* currentGroup = [defaults stringForKey:NCGroupsManagerGroupKey];
     
     if( currentGroup != nil )
     {
-        if( [currentGroup compare:DEFAULT_VALUE] == NSOrderedSame )
+        if( [currentGroup compare:NCGroupsManagerDefaultValue] == NSOrderedSame )
         {
             group = GROUP_DEFAULT;
         }
-        else if( [currentGroup compare:ALL_VALUE] == NSOrderedSame )
+        else if( [currentGroup compare:NCGroupsManagerAllValue] == NSOrderedSame )
         {
             group = GROUP_ALL;
         }
@@ -61,14 +61,14 @@
         
         if( group == GROUP_DEFAULT )
         {
-            groupValue = DEFAULT_VALUE;
+            groupValue = NCGroupsManagerDefaultValue;
         }
         else if( group == GROUP_ALL )
         {
-            groupValue = ALL_VALUE;
+            groupValue = NCGroupsManagerAllValue;
         }
         
-        [defaults setObject:groupValue forKey:GROUP_KEY];
+        [defaults setObject:groupValue forKey:NCGroupsManagerGroupKey];
         [defaults synchronize];
     }
 }
