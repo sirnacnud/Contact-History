@@ -43,11 +43,6 @@
  */
 @property (nonatomic,strong) NSArray* dates;
 
-/**
- PullToRefreshView displayed when the list is refreshing
- */
-@property (nonatomic,strong) PullToRefreshView* pullView;
-
 @end
 
 @implementation NCTableViewController
@@ -57,7 +52,6 @@
 @synthesize addressBookWaiting = _addressBookWaiting;
 @synthesize contacts = _contacts;
 @synthesize dates = _dates;
-@synthesize pullView = _pullView;
 @synthesize selectedGroup = _selectedGroup;
 
 /**
@@ -91,11 +85,9 @@
         [NCGroupsManager setGroup:GROUP_DEFAULT];
     }
     
-    self.pullView = [[PullToRefreshView alloc] initWithScrollView:(UIScrollView*)self.tableView];
-    [self.pullView setDelegate:self];
-    [self.tableView addSubview:self.pullView];
-    
     self.addressBook = ABAddressBookCreateWithOptions( NULL, NULL );
+    
+    ABAddressBookRegisterExternalChangeCallback( self.addressBook, addressBookChanged, (__bridge void *)(self) );
 
     if( ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined )
     {
@@ -113,6 +105,20 @@
     else
     {
         self.addressBookAccess = NO;
+    }
+}
+
+/**
+ @param addressBook Address book that changed
+ @param info Info about the change
+ @param context Self pointer
+ Called when the adress book changes
+ */
+void addressBookChanged( ABAddressBookRef addressBook, CFDictionaryRef info, void *context )
+{
+    if( ![(__bridge NCTableViewController *)(context) addressBookWaiting] )
+    {
+        [(__bridge NCTableViewController *)(context) refreshContactHistory];
     }
 }
 
@@ -268,19 +274,6 @@
 }
 
 /**
- Called when the PullToRefreshView is pulled down via the TableView
- @param view PullToRefreshView
- */
-- (void)pullToRefreshViewShouldRefresh:(PullToRefreshView *)view;
-{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self reloadContactHistory];
-        [self.tableView reloadData];
-        [self.pullView finishedLoading];
-    });
-}
-
-/**
  Reloads the contact history from the address book
  */
 - (void)reloadContactHistory
@@ -389,15 +382,12 @@
         hud.labelText = @"Loading";
 
         self.tableView.userInteractionEnabled = NO;
-
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            
+        dispatch_async(dispatch_get_main_queue(), ^{
             [self reloadContactHistory];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.pullView refreshLastUpdatedDate];
-                [self.tableView reloadData];
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
-                self.tableView.userInteractionEnabled = YES;
-            });
+            [self.tableView reloadData];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            self.tableView.userInteractionEnabled = YES;
         });
     }
     else
