@@ -81,9 +81,6 @@
 {
     [super viewDidLoad];
     
-    // Give user the chance to see the launch image
-    sleep( 1 );
-    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                           selector:@selector(reloadFromNotificatonCenter:)
                                           name:UIApplicationDidBecomeActiveNotification object:nil];
