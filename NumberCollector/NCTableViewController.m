@@ -18,11 +18,6 @@
 @interface NCTableViewController ()
 
 /**
- Addres book object
- */
-@property (nonatomic) ABAddressBookRef addressBook;
-
-/**
  Whether or not we got access to the address book
  */
 @property (nonatomic) BOOL addressBookAccess;
@@ -45,9 +40,10 @@
 
 @end
 
-@implementation NCTableViewController
+@implementation NCTableViewController {
+    ABAddressBookRef _addressBook;
+}
 
-@synthesize addressBook = _addressBook;
 @synthesize addressBookAccess = _addressBookAccess;
 @synthesize addressBookWaiting = _addressBookWaiting;
 @synthesize contacts = _contacts;
@@ -85,15 +81,15 @@
         [NCGroupsManager setGroup:GROUP_DEFAULT];
     }
     
-    self.addressBook = ABAddressBookCreateWithOptions( NULL, NULL );
+    _addressBook = ABAddressBookCreateWithOptions( NULL, NULL );
     
-    ABAddressBookRegisterExternalChangeCallback( self.addressBook, addressBookChanged, (__bridge void *)(self) );
+    ABAddressBookRegisterExternalChangeCallback( _addressBook, addressBookChanged, (__bridge void *)(self) );
 
     if( ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined )
     {
         self.addressBookWaiting = YES;
         
-        ABAddressBookRequestAccessWithCompletion( self.addressBook, ^(bool granted, CFErrorRef error) {
+        ABAddressBookRequestAccessWithCompletion( _addressBook, ^(bool granted, CFErrorRef error) {
             self.addressBookWaiting = NO;
             self.addressBookAccess = YES;
             [self refreshContactHistory];
@@ -106,6 +102,17 @@
     else
     {
         self.addressBookAccess = NO;
+    }
+}
+
+/**
+ Called when class is deallocated
+ */
+-(void)dealloc
+{
+    if( _addressBook )
+    {
+        CFRelease( _addressBook );
     }
 }
 
@@ -244,7 +251,7 @@ void addressBookChanged( ABAddressBookRef addressBook, CFDictionaryRef info, voi
     
     NCContact* contact = [contacts objectAtIndex:row];
     
-    ABRecordRef ref = ABAddressBookGetPersonWithRecordID( self.addressBook, contact.recordId );
+    ABRecordRef ref = ABAddressBookGetPersonWithRecordID( _addressBook, contact.recordId );
     
     if( ref )
     {
@@ -280,9 +287,9 @@ void addressBookChanged( ABAddressBookRef addressBook, CFDictionaryRef info, voi
  */
 - (void)reloadContactHistory
 {
-    if( self.addressBook )
+    if( _addressBook )
     {
-        ABAddressBookRevert( self.addressBook );
+        ABAddressBookRevert( _addressBook );
         
         [self.contacts removeAllObjects];
         
@@ -292,12 +299,13 @@ void addressBookChanged( ABAddressBookRef addressBook, CFDictionaryRef info, voi
         
         if( currentGroup == GROUP_DEFAULT )
         {
-            ABRecordRef defaultSource = ABAddressBookCopyDefaultSource( self.addressBook );
-            allPeople = ABAddressBookCopyArrayOfAllPeopleInSource( self.addressBook, defaultSource );
+            ABRecordRef defaultSource = ABAddressBookCopyDefaultSource( _addressBook );
+            allPeople = ABAddressBookCopyArrayOfAllPeopleInSource( _addressBook, defaultSource );
+            CFRelease( defaultSource );
         }
         else
         {
-            allPeople = ABAddressBookCopyArrayOfAllPeople( self.addressBook );
+            allPeople = ABAddressBookCopyArrayOfAllPeople( _addressBook );
         }
         
         CFIndex numberOfPeople = CFArrayGetCount( allPeople );
@@ -320,8 +328,6 @@ void addressBookChanged( ABAddressBookRef addressBook, CFDictionaryRef info, voi
                 contact.recordId = ABRecordGetRecordID( ref );
                 
                 contact.phoneNumber = (__bridge_transfer NSString*)ABMultiValueCopyValueAtIndex( phoneNumbers, 0 );
-                
-                CFRelease( phoneNumbers );
                 
                 CFStringRef firstName = ABRecordCopyValue( ref, kABPersonFirstNameProperty );
                 CFStringRef lastName = ABRecordCopyValue( ref, kABPersonLastNameProperty );
@@ -362,6 +368,8 @@ void addressBookChanged( ABAddressBookRef addressBook, CFDictionaryRef info, voi
                 
                 [dateGroup addObject:contact];
             }
+                                        
+            CFRelease( phoneNumbers );
         }
         
         [dates sortUsingSelector:@selector(compare:)];
