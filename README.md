@@ -2,7 +2,7 @@
 
 Simple iOS application for displaying and sorting contacts added by date.
 
-[![](https://dl.dropboxusercontent.com/u/20792949/Contact-History-thumb.png)](https://dl.dropboxusercontent.com/u/20792949/Contact-History.png)
+[![](https://raw.githubusercontent.com/sirnacnud/Contact-History/master/Screenshots/Contact-History-thumb.png)](https://raw.githubusercontent.com/sirnacnud/Contact-History/master/Screenshots/Contact-History.png)
 
 ## Requirements
 Requires an iOS 7 compatible device.
